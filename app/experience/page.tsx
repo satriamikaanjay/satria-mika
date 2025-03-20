@@ -28,11 +28,14 @@ import { FaArrowUp, FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaWhatsapp } f
 import { FiMail } from "react-icons/fi";
 import { ReactElement } from "react";
 import React from "react";
+import { IconType } from 'react-icons'; // Penting!
 
 export default function ExperiencePage() {
 
+  
+
   type SocialMedia = {
-          icon: ReactElement | React.ComponentType; // Tipe untuk komponen React
+          icon: IconType; // Tipe untuk komponen React
           color: string;
           link: string;
         };
@@ -54,7 +57,6 @@ export default function ExperiencePage() {
               link: "https://www.instagram.com/satriamika_/" 
             },
           ];
-
   const [showScroll, setShowScroll] = useState(false);
   
     const checkScrollTop = () => {
@@ -165,8 +167,9 @@ export default function ExperiencePage() {
   interface CertificateModalProps {
     isOpen: boolean;
     onClose: () => void;
-    imageUrl: string;
+    imageUrl?: string;
   }
+  
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -763,11 +766,11 @@ const [isZoomed, setIsZoomed] = useState(false);
                       <p className="text-gray-400 mb-4">{exp.description}</p>
                       {exp?.certificateImage && (
   <button
-    onClick={() => openModal(exp.certificateImage)}
-    className="text-[#C6F10E] hover:underline"
-  >
-    View Certificate
-  </button>
+  onClick={() => exp.certificateImage && openModal(exp.certificateImage)}
+  className="text-[#C6F10E] hover:underline"
+>
+  View Certificate
+</button>
 )}
 
                     </div>
@@ -869,11 +872,16 @@ const [isZoomed, setIsZoomed] = useState(false);
       
                   {/* Social Media */}
                   <motion.div
-                                            variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+                                            variants={{
+                                              hidden: { opacity: 0, scale: 0.8 },
+                                              visible: { opacity: 1, scale: 1 }
+                                            }}
                                             className="space-y-4"
                                           >
                                             <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
+                                          
                                             <div className="flex space-x-4">
+                                              {/* HANYA SATU .map() */}
                                               {socialMedias.map((social, index) => (
                                                 <motion.a
                                                   key={index}
@@ -884,16 +892,16 @@ const [isZoomed, setIsZoomed] = useState(false);
                                                   whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
                                                   transition={{ duration: 0.3 }}
                                                 >
-                                                  {/* 3. Render ikon dengan benar */}
-                                                  {React.createElement(social.icon, { 
-                                                    className: "h-6 w-6",
-                                                    style: { color: social.color } 
-                                                  })}
+                                                  {/* Render ikon langsung */}
+                                                  <social.icon 
+                                                    className="h-6 w-6" 
+                                                    style={{ color: social.color }}
+                                                  />
                                                 </motion.a>
                                               ))}
                                             </div>
                                           </motion.div>
-                </motion.div>
+                                        </motion.div>
               </AnimatePresence>
       
               {/* Copyright */}

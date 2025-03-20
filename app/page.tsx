@@ -32,12 +32,13 @@ import { FiMail } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import { ReactElement } from "react";
 import React from "react";
+import { IconType } from 'react-icons'; // Penting!
 
 
 export default function Home() {
 
   type SocialMedia = {
-      icon: ReactElement | React.ComponentType; // Tipe untuk komponen React
+    icon: IconType; // Tipe untuk komponen React
       color: string;
       link: string;
     };
@@ -1108,30 +1109,36 @@ const faqs = [
 
             {/* Social Media */}
             <motion.div
-              variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
-              className="space-y-4"
-            >
-              <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
-              <div className="flex space-x-4">
-                {socialMedias.map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-full bg-white/5 hover:bg-[#C6F10E]/10 transition-all"
-                    whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* 3. Render ikon dengan benar */}
-                    {React.createElement(social.icon, { 
-                      className: "h-6 w-6",
-                      style: { color: social.color } 
-                    })}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
+  variants={{
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 }
+  }}
+  className="space-y-4"
+>
+  <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
+
+  <div className="flex space-x-4">
+    {/* HANYA SATU .map() */}
+    {socialMedias.map((social, index) => (
+      <motion.a
+        key={index}
+        href={social.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 rounded-full bg-white/5 hover:bg-[#C6F10E]/10 transition-all"
+        whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Render ikon langsung */}
+        <social.icon 
+          className="h-6 w-6" 
+          style={{ color: social.color }}
+        />
+      </motion.a>
+    ))}
+  </div>
+</motion.div>
+
           </motion.div>
         </AnimatePresence>
 

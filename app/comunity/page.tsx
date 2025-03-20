@@ -30,12 +30,13 @@ import { FaArrowUp, FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaWhatsapp } f
 import { FiMail } from "react-icons/fi";
 import { ReactElement } from "react";
 import React from "react";
+import { IconType } from 'react-icons'; // Penting!
 
 
 export default function ExperiencePage() {
 
   type SocialMedia = {
-    icon: ReactElement | React.ComponentType; // Tipe untuk komponen React
+    icon: IconType; // Tipe untuk komponen React // Tipe untuk komponen React
     color: string;
     link: string;
   };
@@ -754,131 +755,154 @@ export default function ExperiencePage() {
 
 </div>
 <motion.footer
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative bg-gradient-to-b from-[#19222D] to-[#1A2736] border-t border-[#C6F10E]/20 mt-20"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="relative bg-gradient-to-b from-[#19222D] to-[#1A2736] border-t border-[#C6F10E]/20 mt-20"
+    >
+      {/* Decorative Elements */}
+      <div className="absolute -top-24 left-1/4 w-96 h-96 bg-[#C6F10E]/10 blur-3xl rounded-full -z-10" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#40ffaa]/10 blur-3xl rounded-full -z-10" />
+
+      <div className="container mx-auto px-4 py-12">
+        <AnimatePresence>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12"
           >
-            {/* Decorative Elements */}
-            <div className="absolute -top-24 left-1/4 w-96 h-96 bg-[#C6F10E]/10 blur-3xl rounded-full -z-10" />
-            <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#40ffaa]/10 blur-3xl rounded-full -z-10" />
-      
-            <div className="container mx-auto px-4 py-12">
-              <AnimatePresence>
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={{
-                    visible: { transition: { staggerChildren: 0.1 } }
-                  }}
-                  className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12"
-                >
-                  {/* About Section */}
-                  <motion.div
-                    variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0 } }}
-                    className="space-y-4"
-                  >
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-[#C6F10E] to-[#40ffaa] bg-clip-text text-transparent">
-                      Satria Mika
-                    </h3>
-                    <p className="text-gray-400">
-                      Fullstack Developer & AI Enthusiast building the future with code
-                    </p>
-                  </motion.div>
-      
-                  {/* Quick Links */}
-                  <motion.div
-                    variants={{ hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-[#C6F10E]">Explore</h4>
-                    <ul className="space-y-2">
-                      {['Community'].map((item) => (
-                        <li key={item}>
-                          <a
-                            href={`#${item.toLowerCase()}`}
-                            className="text-gray-400 hover:text-[#40ffaa] transition-colors"
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-      
-                  {/* Contact Info */}
-                  <motion.div
-  variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
-  className="space-y-4"
->
-  <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
-  <div className="flex space-x-4">
-    {socialMedias.map((social, index) => (
-      <motion.a
-        key={index}
-        href={social.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="p-2 rounded-full bg-white/5 hover:bg-[#C6F10E]/10 transition-all"
-        whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* 3. Render ikon dengan benar */}
-        {React.createElement(social.icon, { 
-          className: "h-6 w-6",
-          style: { color: social.color } 
-        })}
-      </motion.a>
-    ))}
-  </div>
-</motion.div>
-                </motion.div>
-              </AnimatePresence>
-      
-              {/* Copyright */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="border-t border-[#C6F10E]/20 pt-8 text-center"
-              >
-                <div className="marquee-container overflow-hidden">
-                  <motion.div
-                    className="marquee-content text-gray-400 text-sm"
-                    animate={{ x: ["100%", "-100%"] }}
-                    transition={{ 
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  >
-                    {Array(3).fill("✨ Lets Code With Me • Built with Next.js • Powered by Satria ✨").join(" • ")}
-                  </motion.div>
+            {/* About Section */}
+            <motion.div
+              variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0 } }}
+              className="space-y-4"
+            >
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-[#C6F10E] to-[#40ffaa] bg-clip-text text-transparent">
+                Satria Mika
+              </h3>
+              <p className="text-gray-400">
+                Fullstack Developer & AI Enthusiast building the future with code
+              </p>
+            </motion.div>
+
+            {/* Quick Links */}
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } }}
+              className="space-y-4"
+            >
+              <h4 className="text-lg font-semibold text-[#C6F10E]">Explore</h4>
+              <ul className="space-y-2">
+                {['Projects', 'Skills', 'Testimoni', 'FaQ'].map((item) => (
+                  <li key={item}>
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="text-gray-400 hover:text-[#40ffaa] transition-colors"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Contact Info */}
+            <motion.div
+              variants={{ hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0 } }}
+              className="space-y-4"
+            >
+              <h4 className="text-lg font-semibold text-[#C6F10E]">Connect</h4>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-gray-400 hover:text-[#40ffaa] transition-colors">
+                  <FiMail className="flex-shrink-0" />
+                  <a href="satrialinux@gmail.com">satrialinux@gmail.com</a>
                 </div>
-                
-                <p className="mt-4 text-gray-500 text-sm">
-                  © {new Date().getFullYear()} Satria Mika. All rights reserved.
-                </p>
-              </motion.div>
-            </div>
-      
-            {/* Scroll to Top Button */}
-            <AnimatePresence>
-              {showScroll && (
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.5 }}
-                  onClick={scrollToTop}
-                  className="fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-[#C6F10E] to-[#40ffaa] text-black shadow-lg hover:shadow-[0_0_20px_rgba(198,241,14,0.5)] transition-all"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <FaArrowUp className="h-6 w-6" />
-                </motion.button>
-              )}
-            </AnimatePresence>
-          </motion.footer>
+                <div className="flex items-center gap-2 text-gray-400 hover:text-[#40ffaa] transition-colors">
+                  <FaGithub className="flex-shrink-0" />
+                  <a href="https://github.com/satriamikaanjay" target="_blank" rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Social Media */}
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+              }}
+              className="space-y-4"
+            >
+              <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
+            
+              <div className="flex space-x-4">
+                {/* HANYA SATU .map() */}
+                {socialMedias.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full bg-white/5 hover:bg-[#C6F10E]/10 transition-all"
+                    whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Render ikon langsung */}
+                    <social.icon 
+                      className="h-6 w-6" 
+                      style={{ color: social.color }}
+                    />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Copyright */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="border-t border-[#C6F10E]/20 pt-8 text-center"
+        >
+          <div className="marquee-container overflow-hidden">
+            <motion.div
+              className="marquee-content text-gray-400 text-sm"
+              animate={{ x: ["100%", "-100%"] }}
+              transition={{ 
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            >
+              {Array(3).fill("✨ Lets Code With Me • Built with Next.js • Powered by Satria ✨").join(" • ")}
+            </motion.div>
+          </div>
+          
+          <p className="mt-4 text-gray-500 text-sm">
+            © {new Date().getFullYear()} Satria Mika. All rights reserved.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScroll && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-[#C6F10E] to-[#40ffaa] text-black shadow-lg hover:shadow-[0_0_20px_rgba(198,241,14,0.5)] transition-all"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <FaArrowUp className="h-6 w-6" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </motion.footer>
     </div>
   );
 }

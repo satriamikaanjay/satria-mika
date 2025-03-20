@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&family=Montserrat+Alternates:wght@600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Poppins", sans-serif;
+  
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* global.css */
+
+/* Animasi untuk project card */
+.project-item {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.5s ease-out;
+}
+
+.project-item.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.project-item.exit {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+/* Animasi khusus untuk arah */
+.project-item.slide-left {
+  transform: translateX(100px);
+}
+.project-item.slide-left.active {
+  transform: translateX(0);
+}
+.project-item.slide-left.exit {
+  transform: translateX(-100px);
+}
+
+.project-item.slide-right {
+  transform: translateX(-100px);
+}
+.project-item.slide-right.active {
+  transform: translateX(0);
+}
+.project-item.slide-right.exit {
+  transform: translateX(100px);
+}
+
+/* Animasi hover untuk gambar */
+.project-image {
+  transition: transform 0.3s ease;
+}
+.project-image:hover {
+  transform: scale(1.03);
+}
+
+@keyframes lightspeed {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes particle {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-50px) scale(0.2); opacity: 0; }
+}
+
+@keyframes rotate-full {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.1; }
+}
+
+.animate-lightspeed {
+  animation: lightspeed 1.5s linear infinite;
+}
+
+.animate-particle {
+  animation: particle 1s ease-out forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Animasi tombol */
+.project-button {
+  transition: all 0.3s ease;
+  background-color: #3B82F6;
+}
+.project-button:hover {
+  background-color: #2563EB;
+  transform: translateY(-2px);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.project-item.active {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Custom scrollbar untuk mobile menu */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #19222D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C6F10E;
+  border-radius: 2px;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* Animasi rotate untuk backdrop */
+@keyframes rotate-background {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes holographic {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.1; }
+  100% { opacity: 0.3; }
+}
+
+.animate-gradient-shift {
+  background-size: 200% auto;
+  animation: gradient-shift 5s linear infinite;
+}
+
+.animate-holographic {
+  animation: holographic 2s ease-in-out infinite;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

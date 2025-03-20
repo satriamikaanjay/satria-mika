@@ -28,9 +28,35 @@ import GradientText from "../components/GradientText/GradientText";
 import { faLaptopCode, faWrench, faServer, faPalette } from "@fortawesome/free-solid-svg-icons";
 import { FaArrowUp, FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
+import { ReactElement } from "react";
+import React from "react";
 
 
 export default function ExperiencePage() {
+
+  type SocialMedia = {
+    icon: ReactElement | React.ComponentType; // Tipe untuk komponen React
+    color: string;
+    link: string;
+  };
+
+  const socialMedias: SocialMedia[] = [
+    { 
+      icon: FaLinkedin, 
+      color: "#0A66C2", 
+      link: "https://www.linkedin.com/in/satria-mika-33240733a/" 
+    },
+    { 
+      icon: FaWhatsapp, 
+      color: "#1DA1F2", 
+      link: "https://wa.me/6281459068817" 
+    },
+    { 
+      icon: FaInstagram, 
+      color: "#E1306C", 
+      link: "https://www.instagram.com/satriamika_/" 
+    },
+  ];
 
   const [showScroll, setShowScroll] = useState(false);
     
@@ -783,63 +809,30 @@ export default function ExperiencePage() {
       
                   {/* Contact Info */}
                   <motion.div
-                    variants={{ hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0 } }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-[#C6F10E]">Connect</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-gray-400 hover:text-[#40ffaa] transition-colors">
-                        <FiMail className="flex-shrink-0" />
-                        <a href="satrialinux@gmail.com">satrialinux@gmail.com</a>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-400 hover:text-[#40ffaa] transition-colors">
-                        <FaGithub className="flex-shrink-0" />
-                        <a href="https://github.com/satriamikaanjay" target="_blank" rel="noopener">GitHub</a>
-                      </div>
-                    </div>
-                  </motion.div>
-      
-                  {/* Social Media */}
-                  <motion.div
-        variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
-        className="space-y-4"
+  variants={{ hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1 } }}
+  className="space-y-4"
+>
+  <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
+  <div className="flex space-x-4">
+    {socialMedias.map((social, index) => (
+      <motion.a
+        key={index}
+        href={social.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 rounded-full bg-white/5 hover:bg-[#C6F10E]/10 transition-all"
+        whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 0.3 }}
       >
-        <h4 className="text-lg font-semibold text-[#C6F10E]">Follow Me</h4>
-        <div className="flex space-x-4">
-          {[
-            { 
-              icon: FaLinkedin, 
-              color: "#0A66C2", 
-              link: "https://www.linkedin.com/in/satria-mika-33240733a/" // Ganti dengan link LinkedIn Anda
-            },
-            { 
-              icon: FaWhatsapp, 
-              color: "#1DA1F2", 
-              link: "https://wa.me/6281459068817" // Ganti dengan link Twitter Anda
-            },
-            { 
-              icon: FaInstagram, 
-              color: "#E1306C", 
-              link: "https://www.instagram.com/satriamika_/" // Ganti dengan link Instagram Anda
-            },
-          ].map((social: SocialMedia, index) => ( // Gunakan tipe SocialMedia
-            <motion.a
-              key={index}
-              href={social.link} // Sekarang TypeScript tidak akan error
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-white/5 hover:bg-[#C6F10E]/10 transition-all"
-              whileHover={{ scale: 1.1, rotate: [0, -10, 10, 0] }}
-              transition={{ duration: 0.3 }}
-            >
-              <social.icon 
-                className="h-6 w-6" 
-                style={{ color: social.color }} 
-              />
-            </motion.a>
-          ))}
-        </div>
-      </motion.div>
+        {/* 3. Render ikon dengan benar */}
+        {React.createElement(social.icon, { 
+          className: "h-6 w-6",
+          style: { color: social.color } 
+        })}
+      </motion.a>
+    ))}
+  </div>
+</motion.div>
                 </motion.div>
               </AnimatePresence>
       
